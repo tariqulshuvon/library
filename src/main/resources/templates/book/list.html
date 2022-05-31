@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: layout(~{::title}, ~{::section})">
+<head>
+  <meta charset="UTF-8">
+  <title>Medicine List</title>
+</head>
+<body>
+
+<section>
+  <h3>Medicines</h3>
+
+  <div class="float-end">
+    <a href="/book/new" type="button" class="btn btn-primary btn-lg">Add New Book</a>
+  </div>
+
+  <br><br>
+
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Author</th>
+      <th>Category</th>
+      <th>Release Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${books.empty}">
+      <td colspan="2">No Book Available</td>
+    </tr>
+    <tr th:each="book : ${books}">
+      <td><span th:text="${book.name}">Name</span></td>
+      <td><span th:text="${book.author}">Author</span></td>
+      <td><span th:text="${book.category?.name}">Category</span></td>
+      <td><span th:text="${#temporals.format(book.releaseDate, 'dd-MM-yyyy')}">Release Date</span></td>
+
+      <td>
+        <a th:href="@{'/book/edit/' + ${book.id}}">Edit</a>
+      </td>
+
+      <td>
+        <a th:href="@{'/book/delete/' + ${book.id}}">Delete</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</section>
+
+</body>
+</html>

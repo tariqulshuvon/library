@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: layout(~{::title}, ~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <title>Add New Book</title>
+</head>
+<body>
+
+<section>
+    <h3>Add New Book</h3>
+
+    <form action="#" th:action="@{/book}" method="post" th:object="${form}">
+        <input type="hidden" th:field="*{id}"/>
+
+
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Category</label>
+            <select class="form-select" th:field="*{categoryId}" id="category">
+                <option th:each="cat : ${categories}" th:value="${cat.id}" th:text="${cat.name}"></option>
+            </select>
+            <ul>
+                <li th:each="err : ${#fields.errors('categoryId')}" th:text="${err}" class="error"></li>
+            </ul>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Book Name</label>
+            <input type="text" th:field="*{name}" class="form-control" id="exampleInputEmail1"
+                   aria-describedby="emailHelp">
+            <ul>
+                <li th:each="err : ${#fields.errors('name')}" th:text="${err}" class="error"></li>
+            </ul>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleInputPrice" class="form-label">Book Author</label>
+            <input type="text" th:field="*{author}" class="form-control" id="exampleInputPrice"
+                   aria-describedby="emailHelp">
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleInputExpiryDate" class="form-label">Book Release Date</label>
+            <input type="date" th:field="*{releaseDate}" class="form-control" id="exampleInputExpiryDate"
+                   aria-describedby="emailHelp">
+
+            <ul>
+                <li th:each="err : ${#fields.errors('releaseDate')}" th:text="${err}" class="error"></li>
+            </ul>
+        </div>
+
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</section>
+
+</body>
+</html>
