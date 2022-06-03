@@ -71,7 +71,7 @@ public class BookController {
                     .author(form.getAuthor())
                     .releaseDate(form.getReleaseDate() != null? form.getReleaseDate().toString(): null )
                     .build();
-            model.addAttribute("form",bookForm);
+            model.addAttribute("book",bookForm);
             model.addAttribute("categories", categoryService.findAll());
         });
         return "book/form";
